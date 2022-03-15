@@ -1,19 +1,21 @@
 #include "main.h"
 
 /**
- * main - Entry point
- * Return:0
+ * main - Print "_putchar"
+ *
+ * Return: Always 0 (Success)
  */
 
 int main(void)
 {
-char c[8] = "_putchar";
-int i = 0;
-while (i < 7)
-{
-_putchar(c[i]);
-i++;
-}
-_putchar('\n');
-return (0);
+	int i = 0;
+	char name_of_string[] = "_putchar";
+
+	while (i < 8)
+	{
+		_putchar(name_of_string[i]);
+		i++;
+	}
+	_putchar('\n');
+	return (0);
 }

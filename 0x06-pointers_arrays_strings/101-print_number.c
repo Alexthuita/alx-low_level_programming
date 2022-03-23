@@ -1,29 +1,41 @@
 #include "main.h"
 
 /**
- * print_number - prints an integer.
- * @n: integer
- * Return: void
- */
+*  _strcmp - Function which compare two strings and
+*@s1: first string
+*@s2:second string
+*Return:
+*		returns zero if s1 == s2
+*		returns negative number if s1 < s2
+*		returns positive number if s1 > s2
+*/
 
-void print_number(int n)
+int _strcmp(char *s1, char *s2)
 {
-int divisor = 1, i, resp;
+	int i = 0, diff = 0;
 
-if (n < 0)
-{
-	_putchar('-');
-	n *= -1;
-}
+	while (1)
+	{
+		if (s1[i] == '\0' && s2[i] == '\0')
+			break;
+		else if (s1[i] == '\0')
+		{
+			diff = s2[i];
+			break;
+		}
+		else if (s2[i] == '\0')
+		{
+			diff = s1[i];
+			break;
+		}
+		else if (s1[i] != s2[i])
+		{
+			diff = s1[i] - s2[i];
+			break;
+		}
+		else
+			i++;
 
-for (i = 0; n / divisor > 9; i++, divisor *= 10)
-;
-
-for (; divisor >= 1; n %= divisor, divisor /= 10)
-{
-	resp = n / divisor;
-	_putchar('0' + resp);
-
-}
-
+	}
+	return (diff);
 }

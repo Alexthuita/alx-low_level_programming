@@ -1,76 +1,85 @@
 #include "dog.h"
-#include <stdio.h>
 #include <stdlib.h>
+
 /**
- * new_dog - create new data structure for dog
- * @name: name of dog
+ * _strlen - returns the length of a string
+ * @s: pointer to the string
+ * Return: returns the length of the strin
+ */
+
+int _strlen(char *s)
+{
+	int idx = 0;
+
+	while (*(s + idx) != '\0')
+	{
+		idx++;
+	}
+
+	return (idx);
+}
+
+/**
+ * _strcpy - copy string to destination
+ * @dest: destination
+ * @src: string to be copied
+ * Return: pointer to the destination.
+ */
+
+char *_strcpy(char *dest, char *src)
+{
+	char *saved = dest;
+
+	while (*src)
+	{
+		*dest++ = *src++;
+	}
+
+	*dest = 0;
+
+	return (saved);
+}
+
+/**
+ * new_dog - creates a new dog
  * @age: age of dog
- * @owner: dog owner
- *
- * Return: Pointer to new dog
- **/
+ * @name: name of the dog
+ * @owner: owner of the dog
+ * Return: pointer to created dog if succesful else NULL
+ */
+
 dog_t *new_dog(char *name, float age, char *owner)
 {
 	dog_t *new_dog;
-	int len_name, len_owner;
+	char *dog_name;
+	char *dog_owner;
+
 
 	new_dog = malloc(sizeof(dog_t));
 	if (new_dog == NULL)
 		return (NULL);
 
-	len_name = _strlen(name);
-	new_dog->name = malloc(sizeof(char) * len_name + 1);
-	if (new_dog->name == NULL)
+	dog_name = malloc(_strlen(name) + 1);
+	if (dog_name == NULL)
 	{
-		free(new_dog);
-		return (NULL);
-	}
-	new_dog->name = _strcpy(new_dog->name, name);
-	len_owner = _strlen(owner);
-	new_dog->owner = malloc(sizeof(char) * len_owner + 1);
-	if (new_dog->owner == NULL)
-	{
-		free(new_dog->name);
 		free(new_dog);
 		return (NULL);
 	}
 
-	new_dog->owner = _strcpy(new_dog->owner, owner);
+	dog_owner = malloc(_strlen(owner) + 1);
+	if (dog_owner == NULL)
+	{
+		free(new_dog);
+		free(dog_name);
+		return (NULL);
+	}
+
+	_strcpy(dog_name, name);
+	_strcpy(dog_owner, owner);
+
 	new_dog->age = age;
+	new_dog->name = dog_name;
+	new_dog->owner = dog_owner;
 
 	return (new_dog);
-}
-
-/**
- * _strlen - determinates the lenght of a string
- * @s: pointer to string
- * Return: the length
- */
-int _strlen(char *s)
-{
-	int a;
-
-	for (a = 0; s[a] != '\0'; a++)
-	;
-	return (a);
-}
-
-/**
- * _strcpy - copies a pointed string
- * @dest: pointer to the destine string
- * @src: pointer to the source string
- * Return: the adress of the destiny string
- */
-char *_strcpy(char *dest, char *src)
-{
-	int a = 0;
-
-	while (src[a] != '\0')
-	{
-		dest[a] = src[a];
-		a++;
-	}
-
-	dest[a] = '\0';
-	return (dest);
 }

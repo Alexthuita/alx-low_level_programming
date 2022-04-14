@@ -2,29 +2,24 @@
 #include <stdarg.h>
 
 /**
-*sum_them_all - sums all its parameters
-*@n: first parameter
-*
-*Return: 0 if n is null
-* or sum of parameters in other case
+* sum_them_all - function that returns the sum of all its parameters.
+* @n: number of integers
+* @...: list of integers
+* Return: sum of integers
 */
+
 
 int sum_them_all(const unsigned int n, ...)
 {
+	int sum = 0;
+	int idx;
+	va_list arg_pointer;
 
-va_list li;
-int sum = 0;
-unsigned int i;
+	va_start(arg_pointer, n);
 
-va_start(li, n);
+	for (idx = 0; idx < (int)n; idx++)
+		sum += va_arg(arg_pointer, int);
 
-if (n != 0)
-{
-for (i = 0; i < n; i++)
-sum += va_arg(li, int);
-}
-
-va_end(li);
-return (sum);
-
+	va_end(arg_pointer);
+	return (sum);
 }

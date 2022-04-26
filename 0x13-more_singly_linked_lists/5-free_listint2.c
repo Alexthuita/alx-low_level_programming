@@ -1,27 +1,26 @@
 #include "lists.h"
 
 /**
-*free_listint2 - frees a linked list
-*@head: pointer to the head of the list
-*
-*Return: void
-*/
+ * free_listint2 - frees a listint_t list
+ * Description: at the end, the head will point to NULL.
+ * So, as we know the tail always points to NULL, we will
+ * be moving a temp pointer, free its memory if not NULL
+ * Untill we reach the tail
+ * @head: head of linked list
+ */
 
 void free_listint2(listint_t **head)
 {
-listint_t *cursor;
-listint_t **temp = head;
+	listint_t *current;
 
-if (temp != NULL)
-{
-while (*head != NULL)
-{
-cursor = *head;
-free(cursor);
-*head = (*head)->next;
-}
+	if (head == NULL)
+		return;
 
-*temp = NULL;
+	while (*head != NULL)
+	{
+		current = *head;
+		*head = (*head)->next;
+		free(current);
+	}
 
-}
 }
